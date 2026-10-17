@@ -1,11 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="660" height="400" viewBox="0 0 660 400">
+<svg xmlns="http://www.w3.org/2000/svg" width="660" height="520" viewBox="0 0 660 520">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#fff4f0"/>
       <stop offset="1" stop-color="#fbe7ef"/>
     </linearGradient>
   </defs>
-  <rect width="660" height="400" fill="url(#g)"/>
+  <rect width="660" height="520" fill="url(#g)"/>
   <text x="330" y="62" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial" font-size="22" font-weight="700" fill="#2a1520">Cliché</text>
   <text x="330" y="88" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial" font-size="13" fill="#7a5a66">Drag Cliché to Applications</text>
   <path d="M262 190 C 300 168, 360 168, 398 190" fill="none" stroke="#f0436b" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 12"/>
