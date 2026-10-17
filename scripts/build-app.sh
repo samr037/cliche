@@ -17,6 +17,8 @@ cp Resources/Info.plist "$APP/Contents/Info.plist"
 [ -n "$CLICHE_VERSION" ] && /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $CLICHE_VERSION" "$APP/Contents/Info.plist"
 cp "$BIN" "$APP/Contents/MacOS/Cliche"
 cp Resources/AppIcon.icns "$APP/Contents/Resources/"
+# Traductions (fr = textes source, en = langue de repli).
+for l in Resources/*.lproj; do rm -rf "$APP/Contents/Resources/$(basename "$l")"; cp -R "$l" "$APP/Contents/Resources/"; done
 [ -f LICENSE ] && cp LICENSE "$APP/Contents/Resources/LICENSE.txt"
 codesign --force --sign "$IDENTITY" --identifier io.github.samr037.cliche "$APP"
 codesign --verify --strict "$APP"

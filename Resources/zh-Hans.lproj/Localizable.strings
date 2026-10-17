@@ -1,0 +1,473 @@
+/* Chinois simplifié (zh-Hans). Clés = texte source français. */
+
+/* CanvasView.swift:47 */
+"Sélection" = "选择";
+
+/* CanvasView.swift:48 */
+"Flèche" = "箭头";
+
+/* CanvasView.swift:49 */
+"Ligne" = "直线";
+
+/* CanvasView.swift:50 */
+"Rectangle" = "矩形";
+
+/* CanvasView.swift:51 */
+"Ovale" = "椭圆";
+
+/* CanvasView.swift:52 */
+"Texte" = "文本";
+
+/* CanvasView.swift:53 */
+"Main levée" = "手绘";
+
+/* CanvasView.swift:54 */
+"Surligneur" = "荧光笔";
+
+/* CanvasView.swift:55 */
+"Masquer (flou, pixels, effacer)" = "遮盖（模糊、像素化、擦除）";
+
+/* CanvasView.swift:56 */
+"Projecteur" = "聚光灯";
+
+/* CanvasView.swift:57 */
+"Loupe" = "放大镜";
+
+/* CanvasView.swift:58 */
+"Compteur" = "编号";
+
+/* CanvasView.swift:59 */
+"Règle" = "标尺";
+
+/* CanvasView.swift:60 */
+"Recadrer" = "裁剪";
+
+/* Capture.swift:17 */
+"Cliché a besoin de l'autorisation « Enregistrement de l'écran »." = "Cliché 需要“屏幕录制”权限。";
+
+/* Capture.swift:18 */
+"Aucun écran trouvé." = "未找到显示器。";
+
+/* EditorWindow.swift:65 */
+"Sans fond" = "无背景";
+
+/* EditorWindow.swift:65 */
+"Dégradé violet" = "紫色渐变";
+
+/* EditorWindow.swift:66 */
+"Dégradé corail" = "珊瑚色渐变";
+
+/* EditorWindow.swift:66 */
+"Dégradé lagon" = "湖蓝渐变";
+
+/* EditorWindow.swift:67 */
+"Ardoise" = "石板灰";
+
+/* EditorWindow.swift:67 */
+"Mesh pastel" = "柔彩网格";
+
+/* EditorWindow.swift:67 */
+"Gris clair" = "浅灰色";
+
+/* EditorWindow.swift:68 */
+"Fond décoratif (appliqué à l'export)" = "装饰背景（导出时应用）";
+
+/* EditorWindow.swift:78 */
+"Copier le texte (OCR)" = "拷贝文本（OCR）";
+
+/* EditorWindow.swift:79 */
+"Épingler à l'écran (⌘P)" = "固定到屏幕（⌘P）";
+
+/* EditorWindow.swift:80 */
+"Enregistrer (⌘S)" = "存储（⌘S）";
+
+/* EditorWindow.swift:81 */
+"Copier (⌘C)" = "拷贝（⌘C）";
+
+/* EditorWindow.swift:161 */
+"Effilée" = "锥形";
+
+/* EditorWindow.swift:161 */
+"Trait" = "线条";
+
+/* EditorWindow.swift:161 */
+"Double" = "双向";
+
+/* EditorWindow.swift:161 */
+"Ouverte" = "空心";
+
+/* EditorWindow.swift:164 */
+"Contour" = "描边";
+
+/* EditorWindow.swift:164 */
+"Plein" = "填充";
+
+/* EditorWindow.swift:164 */
+"Contour sur blanc" = "白底描边";
+
+/* EditorWindow.swift:167 */
+"Flou" = "模糊";
+
+/* EditorWindow.swift:167 */
+"Pixels" = "像素化";
+
+/* EditorWindow.swift:167 */
+"Effacer" = "擦除";
+
+/* EditorWindow.swift:170 */
+"Simple" = "普通";
+
+/* EditorWindow.swift:170 */
+"Pastille" = "标签";
+
+/* EditorWindow.swift:173 */
+"Correction de forme" = "形状校正";
+
+/* EditorWindow.swift:173 */
+"Tracé libre" = "自由绘制";
+
+/* EditorWindow.swift:229 */
+"contraste %@ (%@)" = "对比度 %@（%@）";
+
+/* EditorWindow.swift:237 */
+"Cliché — fond" = "Cliché — 背景";
+
+/* EditorWindow.swift:245 */
+"Copié dans le presse-papiers" = "已拷贝到剪贴板";
+
+/* EditorWindow.swift:251 */
+"Enregistré : %@" = "已存储：%@";
+
+/* EditorWindow.swift:276 */
+"Aucun texte détecté" = "未检测到文本";
+
+/* EditorWindow.swift:279 */
+"Texte copié" = "已拷贝文本";
+
+/* Hotkeys.swift:52 */
+"Espace" = "空格";
+
+/* Hotkeys.swift:80 */
+"Capture plein écran" = "全屏截图";
+
+/* Hotkeys.swift:81 */
+"Capture de zone" = "区域截图";
+
+/* Hotkeys.swift:82 */
+"Répéter la capture de zone" = "重复区域截图";
+
+/* Hotkeys.swift:83 */
+"Capture de fenêtre" = "窗口截图";
+
+/* Hotkeys.swift:84 */
+"Capture défilante" = "滚动截图";
+
+/* Hotkeys.swift:85 */
+"Reconnaître le texte (OCR / QR)" = "识别文本（OCR / QR）";
+
+/* Hotkeys.swift:86 */
+"Capture plein écran différée (3 s)" = "延时全屏截图（3 秒）";
+
+/* Hotkeys.swift:87 */
+"Ouvrir depuis le presse-papiers" = "从剪贴板打开";
+
+/* Output.swift:32 */
+"Échec de l'enregistrement : %@" = "存储失败：%@";
+
+/* Panels.swift:69 */
+"Copier" = "拷贝";
+
+/* Panels.swift:70 */
+"Taille réelle" = "实际大小";
+
+/* Panels.swift:71 */
+"Fermer" = "关闭";
+
+/* Panels.swift:173 */
+"Enregistrer" = "存储";
+
+/* Panels.swift:174 */
+"Épingler" = "固定";
+
+/* Panels.swift:208 */
+"Copié" = "已拷贝";
+
+/* ScrollCapture.swift:52 */
+"Hauteur maximale atteinte" = "已达到最大高度";
+
+/* ScrollCapture.swift:87 */
+"Capture défilante… Échap ou clic pour arrêter" = "正在滚动截图…按 Esc 或点按以停止";
+
+/* SettingsWindow.swift:13 */
+"Général" = "通用";
+
+/* SettingsWindow.swift:14 */
+"Capture" = "截图";
+
+/* SettingsWindow.swift:15 */
+"Éditeur" = "编辑器";
+
+/* SettingsWindow.swift:16 */
+"Défilement" = "滚动";
+
+/* SettingsWindow.swift:17 */
+"Raccourcis" = "快捷键";
+
+/* SettingsWindow.swift:18 */
+"À propos" = "关于";
+
+/* SettingsWindow.swift:166 */
+"Cliché" = "Cliché";
+
+/* SettingsWindow.swift:167 */
+"v%@" = "v%@";
+
+/* SettingsWindow.swift:211 */
+"Après une capture" = "截图后";
+
+/* SettingsWindow.swift:212 */
+"Afficher" = "显示";
+
+/* SettingsWindow.swift:214 */
+"Vignette" = "缩略图";
+
+/* SettingsWindow.swift:216 */
+"Rien" = "无";
+
+/* SettingsWindow.swift:220 */
+"Copier dans le presse-papiers" = "拷贝到剪贴板";
+
+/* SettingsWindow.swift:221 */
+"Enregistrer dans le dossier" = "存储到文件夹";
+
+/* SettingsWindow.swift:224 */
+"Vignette visible" = "缩略图显示时长";
+
+/* SettingsWindow.swift:226 */
+"4 s" = "4 秒";
+
+/* SettingsWindow.swift:226 */
+"6 s" = "6 秒";
+
+/* SettingsWindow.swift:226 */
+"10 s" = "10 秒";
+
+/* SettingsWindow.swift:226 */
+"Jusqu'au clic" = "直到点按";
+
+/* SettingsWindow.swift:231 */
+"Enregistrement" = "存储";
+
+/* SettingsWindow.swift:232 */
+"Dossier" = "文件夹";
+
+/* SettingsWindow.swift:235 */
+"Choisir…" = "选择…";
+
+/* SettingsWindow.swift:239 */
+"Format" = "格式";
+
+/* SettingsWindow.swift:244 */
+"Réduire les captures Retina à 1×" = "将 Retina 截图缩小至 1×";
+
+/* SettingsWindow.swift:246 */
+"Système" = "系统";
+
+/* SettingsWindow.swift:247 */
+"Ouvrir Cliché à l'ouverture de session" = "登录时打开 Cliché";
+
+/* SettingsWindow.swift:249 */
+"Enregistrement de l'écran" = "屏幕录制";
+
+/* SettingsWindow.swift:249 */
+"Indispensable pour toute capture." = "所有截图都需要此权限。";
+
+/* SettingsWindow.swift:251 */
+"Accessibilité" = "辅助功能";
+
+/* SettingsWindow.swift:251 */
+"Seulement pour la capture défilante (molette simulée)." = "仅用于滚动截图（模拟滚轮）。";
+
+/* SettingsWindow.swift:262 */
+"Image" = "图像";
+
+/* SettingsWindow.swift:263 */
+"Inclure le curseur" = "包括指针";
+
+/* SettingsWindow.swift:264 */
+"Garder l'ombre des fenêtres" = "保留窗口阴影";
+
+/* SettingsWindow.swift:266 */
+"Texte et QR codes" = "文本和 QR 码";
+
+/* SettingsWindow.swift:267 */
+"Joindre les lignes reconnues (sans retours à la ligne)" = "合并识别出的行（不换行）";
+
+/* SettingsWindow.swift:268 */
+"La reconnaissance se fait sur le Mac avec Vision ; rien n'est envoyé en ligne." = "识别由 Vision 在 Mac 上完成，不会上传任何内容。";
+
+/* SettingsWindow.swift:276 */
+"Outils" = "工具";
+
+/* SettingsWindow.swift:277 */
+"Couleur par défaut" = "默认颜色";
+
+/* SettingsWindow.swift:289 */
+"Épaisseur" = "粗细";
+
+/* SettingsWindow.swift:292 */
+"%lld px" = "%lld px";
+
+/* SettingsWindow.swift:295 */
+"Format de couleur (pipette)" = "颜色格式（取色器）";
+
+/* SettingsWindow.swift:301 */
+"Fermeture" = "关闭";
+
+/* SettingsWindow.swift:302 */
+"Échap copie l'image avant de fermer l'éditeur" = "按 Esc 会在关闭编辑器前拷贝图像";
+
+/* SettingsWindow.swift:304 */
+"Raccourcis de l'éditeur" = "编辑器快捷键";
+
+/* SettingsWindow.swift:321 */
+"Hauteur maximale" = "最大高度";
+
+/* SettingsWindow.swift:327 */
+"Vitesse" = "速度";
+
+/* SettingsWindow.swift:335 */
+"Inverser le sens (si un utilitaire inverse déjà la molette)" = "反转方向（如果已有工具反转了滚轮）";
+
+/* SettingsWindow.swift:337 */
+"Choisissez la zone qui défile : Cliché fait défiler la page, recolle les images et retire les barres fixes (en-tête, pied). Échap ou un clic arrête." = "选择要滚动的区域：Cliché 会滚动页面、拼接图像，并移除固定栏（页眉、页脚）。按 Esc 或点按即可停止。";
+
+/* SettingsWindow.swift:344 */
+"Raccourcis globaux" = "全局快捷键";
+
+/* SettingsWindow.swift:353 */
+"Ce raccourci est déjà utilisé par une autre app" = "此快捷键已被其他 App 使用";
+
+/* SettingsWindow.swift:360 */
+"Cliquez puis tapez une combinaison. ⌫ efface, Échap annule." = "点按后按下组合键。⌫ 清除，Esc 取消。";
+
+/* SettingsWindow.swift:362 */
+"Rétablir les raccourcis par défaut" = "恢复默认快捷键";
+
+/* SettingsWindow.swift:364 */
+"Schéma d'URL" = "URL 方案";
+
+/* SettingsWindow.swift:365 */
+"Autoriser les liens cliche:// (apps et pages web)" = "允许 cliche:// 链接（App 和网页）";
+
+/* SettingsWindow.swift:366 */
+"cliche://grab/area · grab/fullscreen · grab/window · grab/scrolling · grab/area/repeat · ocr · load/clipboard" = "cliche://grab/area · grab/fullscreen · grab/window · grab/scrolling · grab/area/repeat · ocr · load/clipboard";
+
+/* SettingsWindow.swift:368 */
+"Pratique depuis Raccourcis, Raycast ou Alfred : open \"cliche://grab/area\"" = "适合在快捷指令、Raycast 或 Alfred 中使用：open \"cliche://grab/area\"";
+
+/* SettingsWindow.swift:378 */
+"Captures d'écran open source pour macOS.\nCapturer, annoter, mesurer." = "适用于 macOS 的开源截图工具。\n截图、标注、测量。";
+
+/* SettingsWindow.swift:379 */
+"Version %@ · Licence MIT" = "版本 %@ · MIT 许可证";
+
+/* SettingsWindow.swift:381 */
+"Code source" = "源代码";
+
+/* SettingsWindow.swift:383 */
+"Signaler un problème" = "报告问题";
+
+/* SettingsWindow.swift:437 */
+"Tapez le raccourci…" = "按下快捷键…";
+
+/* SettingsWindow.swift:437 */
+"Aucun" = "无";
+
+/* SettingsWindow.swift:463 */
+"Autoriser…" = "允许…";
+
+/* SettingsWindow.swift:475 */
+"Réglages de Cliché" = "Cliché 设置";
+
+/* Snapshots.swift:59 */
+"Latence ici" = "此处延迟";
+
+/* main.swift:55 */
+"Ouvrir une image…" = "打开图像…";
+
+/* main.swift:58 */
+"Réglages…" = "设置…";
+
+/* main.swift:62 */
+"Quitter Cliché" = "退出 Cliché";
+
+/* main.swift:80 */
+"Quitter" = "退出";
+
+/* main.swift:81 */
+"Fichier" = "文件";
+
+/* main.swift:82 */
+"Enregistrer sous…" = "存储为…";
+
+/* main.swift:85 */
+"Édition" = "编辑";
+
+/* main.swift:85 */
+"Annuler" = "撤销";
+
+/* main.swift:86 */
+"Rétablir" = "重做";
+
+/* main.swift:88 */
+"Coller" = "粘贴";
+
+/* main.swift:89 */
+"Tout sélectionner" = "全选";
+
+/* main.swift:90 */
+"Présentation" = "显示";
+
+/* main.swift:90 */
+"Zoom avant" = "放大";
+
+/* main.swift:91 */
+"Zoom arrière" = "缩小";
+
+/* main.swift:93 */
+"Ajuster à la fenêtre" = "缩放以适合窗口";
+
+/* main.swift:130 */
+"Capture dans 3 s…" = "3 秒后截图…";
+
+/* main.swift:135 */
+"Faites d'abord une capture de zone" = "请先进行区域截图";
+
+/* main.swift:144 */
+"La capture défilante demande l'autorisation Accessibilité" = "滚动截图需要“辅助功能”权限";
+
+/* main.swift:167 */
+"Texte copié : %@" = "已拷贝文本：%@";
+
+/* main.swift:172 */
+"Pas d'image dans le presse-papiers" = "剪贴板中没有图像";
+
+/* main.swift:225 */
+"Capturé" = "已截图";
+
+/* main.swift:240 */
+"Lien cliche:// refusé" = "已拒绝 cliche:// 链接";
+
+/* main.swift:246 */
+"Autoriser les liens cliche:// ?" = "允许 cliche:// 链接？";
+
+/* main.swift:247 */
+"Une app ou une page web demande « %@ ». Si vous autorisez, les liens cliche:// pourront lancer des captures sans confirmation. Modifiable dans Réglages › Raccourcis." = "某个 App 或网页请求“%@”。如果允许，cliche:// 链接将无需确认即可开始截图。可在“设置 › 快捷键”中更改。";
+
+/* main.swift:248 */
+"Autoriser" = "允许";
+
+/* main.swift:249 */
+"Refuser" = "拒绝";
+

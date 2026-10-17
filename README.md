@@ -23,8 +23,8 @@ Cliché lives in your menu bar. Press a shortcut, pick an area, and the screensh
 ## Features
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/media/editor-dark.png">
-  <img src="docs/media/editor-light.png" alt="The Cliché editor with an arrow, a numbered step, a ruler and a text label">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/media/en/editor-dark.png">
+  <img src="docs/media/en/editor-light.png" alt="The Cliché editor with an arrow, a numbered step, a ruler and a text label">
 </picture>
 
 **Capture**
@@ -44,13 +44,17 @@ Arrow (tapered, line, double, open) · line · rectangle · oval · text (plain,
 - Copy, save (PNG, JPEG or auto), drag the thumbnail into any app, or **pin** the image above all windows (scroll to zoom, ⌥ + scroll for opacity).
 - **Backdrops** for social posts: gradients, mesh, solid, with padding, rounded corners and shadow.
 
-<p align="center"><img src="docs/media/export-backdrop.png" width="720" alt="Export with a gradient backdrop"></p>
+<p align="center"><img src="docs/media/en/export-backdrop.png" width="720" alt="Export with a gradient backdrop"></p>
+
+## Languages
+
+Cliché speaks English, French, German, Spanish, Italian, Brazilian Portuguese, Japanese and Simplified Chinese. It follows your macOS language and falls back to English. Translations share a [glossary](docs/l10n-glossary.md) and use Apple's own wording for system names. CI checks that every language has every string with matching placeholders. Corrections are welcome.
 
 ## Settings
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/media/settings-shortcuts-dark.png">
-  <img src="docs/media/settings-shortcuts-light.png" width="720" alt="Settings: global shortcuts">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/media/en/settings-shortcuts-dark.png">
+  <img src="docs/media/en/settings-shortcuts-light.png" width="720" alt="Settings: global shortcuts">
 </picture>
 
 Every global shortcut can be re-recorded. Cliché flags shortcuts that another app has already taken. Also configurable: after-capture behavior, save folder and format, Retina downscaling, default color and stroke, scrolling speed and height limit, launch at login.
@@ -59,12 +63,12 @@ Every global shortcut can be re-recorded. Cliché flags shortcuts that another a
 
 | Global | Default | | Editor | Key |
 |---|---|---|---|---|
-| Fullscreen | ⌘⇧1 | | Select / move | V |
-| Area | ⌘⇧2 | | Arrow · Line | A · L |
-| Window | ⌘⇧6 | | Rectangle · Oval | R · O |
-| Scrolling capture | ⌘⇧7 | | Text · Freehand | T · D |
-| Text / QR (OCR) | ⌘⇧8 | | Highlight · Conceal | H · B |
-| Repeat area | ⌘⇧9 | | Spotlight · Magnifier | S · M |
+| Fullscreen capture | ⇧⌘1 | | Select | V |
+| Area capture | ⇧⌘2 | | Arrow · Line | A · L |
+| Window capture | ⇧⌘6 | | Rectangle · Oval | R · O |
+| Scrolling capture | ⇧⌘7 | | Text · Freehand | T · D |
+| Recognize text (OCR / QR) | ⇧⌘8 | | Highlighter · Conceal | H · B |
+| Repeat area capture | ⇧⌘9 | | Spotlight · Magnifier | S · M |
 | | | | Counter · Ruler · Crop | N · 1 · C |
 | | | | Copy & close | Esc |
 

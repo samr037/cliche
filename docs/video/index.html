@@ -165,7 +165,7 @@
       <div id="loupe"></div>
       <div id="loupe-info" class="mono">640, 320 · #F0436B</div>
     </div>
-    <div class="keys" id="keys" style="left:120px; top:642px"><div class="key">⌘</div><div class="key">⇧</div><div class="key">2</div></div>
+    <div class="keys" id="keys" style="left:120px; top:642px"><div class="key">⇧</div><div class="key">⌘</div><div class="key">2</div></div>
   </section>
 
   <!-- 3. Éditeur -->
@@ -396,7 +396,7 @@
   // Règle intelligente.
   tl.to("#tool-mosaic", { background: "transparent", boxShadow: "none", duration: .1 }, E + 3.6);
   tl.to("#tool-ruler", { background: "#fff", boxShadow: "0 1px 2px rgba(0,0,0,.15)", duration: .1 }, E + 3.6);
-  tl.set("#stylepop", { textContent: "Snap to edges" }, E + 3.6);
+  tl.set("#stylepop", { autoAlpha: 0 }, E + 3.6);   // la règle n'a pas de menu de style
   tl.set("#st", { textContent: "x 984  y 420   #F7F3F8   ↔ 184  ↕ 96" }, E + 3.6);
   tl.to(rulerState, { t: 1, duration: .6, ease: "power2.out", onUpdate: drawRuler }, E + 3.8);
   tl.fromTo("#rlabel", { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: .3, ease: "back.out(2)" }, E + 4.3);

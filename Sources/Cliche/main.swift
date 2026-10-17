@@ -164,7 +164,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                         guard let text else { Toast.show(String(localized: "Aucun texte détecté")); return }
                         NSPasteboard.general.clearContents()
                         NSPasteboard.general.setString(text, forType: .string)
-                        Toast.show(String(localized: "Texte copié : \(text.prefix(40))"))
+                        Toast.show(String(localized: "Texte copié : \(String(text.prefix(40)))"))
                     }
                 }
             }

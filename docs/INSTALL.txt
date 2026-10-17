@@ -16,8 +16,8 @@ Requires macOS 14 (Sonoma) or later, Apple Silicon or Intel.
    needs "Accessibility".
 
 4. Cliché lives in the menu bar. Default shortcuts:
-     ⌘⇧1  fullscreen      ⌘⇧2  area         ⌘⇧6  window
-     ⌘⇧7  scrolling       ⌘⇧8  text (OCR)   ⌘⇧9  repeat area
+     ⇧⌘1  fullscreen      ⇧⌘2  area         ⇧⌘6  window
+     ⇧⌘7  scrolling       ⇧⌘8  text (OCR)   ⇧⌘9  repeat area
    Change them in Settings › Shortcuts.
 
 Everything stays on your Mac: no account, no upload, no telemetry.

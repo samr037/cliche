@@ -49,7 +49,7 @@ struct Shortcut: Equatable, Codable {
 
     static func keyName(_ code: Int) -> String {
         let special: [Int: String] = [
-            kVK_Return: "↩", kVK_Tab: "⇥", kVK_Space: "Espace", kVK_Delete: "⌫", kVK_Escape: "⎋", kVK_ForwardDelete: "⌦",
+            kVK_Return: "↩", kVK_Tab: "⇥", kVK_Space: String(localized: "Espace"), kVK_Delete: "⌫", kVK_Escape: "⎋", kVK_ForwardDelete: "⌦",
             kVK_LeftArrow: "←", kVK_RightArrow: "→", kVK_UpArrow: "↑", kVK_DownArrow: "↓", kVK_Home: "↖", kVK_End: "↘",
             kVK_F1: "F1", kVK_F2: "F2", kVK_F3: "F3", kVK_F4: "F4", kVK_F5: "F5", kVK_F6: "F6", kVK_F7: "F7", kVK_F8: "F8",
             kVK_F9: "F9", kVK_F10: "F10", kVK_F11: "F11", kVK_F12: "F12", kVK_F13: "F13", kVK_F14: "F14", kVK_F15: "F15",
@@ -59,15 +59,24 @@ struct Shortcut: Equatable, Codable {
         guard let src = TISCopyCurrentKeyboardLayoutInputSource()?.takeRetainedValue(),
               let ptr = TISGetInputSourceProperty(src, kTISPropertyUnicodeKeyLayoutData) else { return "?" }
         let data = Unmanaged<CFData>.fromOpaque(ptr).takeUnretainedValue() as Data
-        var dead: UInt32 = 0
-        var chars = [UniChar](repeating: 0, count: 4)
-        var len = 0
-        let status = data.withUnsafeBytes { raw -> OSStatus in
-            UCKeyTranslate(raw.bindMemory(to: UCKeyboardLayout.self).baseAddress, UInt16(code), UInt16(kUCKeyActionDisplay),
-                           0, UInt32(LMGetKbdType()), OptionBits(kUCKeyTranslateNoDeadKeysBit), &dead, 4, &len, &chars)
+        func translate(_ modifiers: UInt32) -> String? {
+            var dead: UInt32 = 0
+            var chars = [UniChar](repeating: 0, count: 4)
+            var len = 0
+            let status = data.withUnsafeBytes { raw -> OSStatus in
+                UCKeyTranslate(raw.bindMemory(to: UCKeyboardLayout.self).baseAddress, UInt16(code), UInt16(kUCKeyActionDisplay),
+                               modifiers, UInt32(LMGetKbdType()), OptionBits(kUCKeyTranslateNoDeadKeysBit), &dead, 4, &len, &chars)
+            }
+            return status == noErr && len > 0 ? String(utf16CodeUnits: chars, count: len) : nil
         }
-        guard status == noErr, len > 0 else { return "?" }
-        return String(utf16CodeUnits: chars, count: len).uppercased()
+        guard let plain = translate(0) else { return "?" }
+        // Rangée des chiffres en AZERTY : la touche donne « & » ou « é » sans Maj et « 1 » ou « 2 » avec. On affiche le chiffre,
+        // comme les raccourcis ⇧⌘1… sont documentés partout.
+        if let shifted = translate(UInt32(shiftKey >> 8) & 0xFF), shifted.count == 1, shifted.first!.isNumber,
+           !(plain.first?.isNumber ?? false) {
+            return shifted
+        }
+        return plain.uppercased()
     }
 }
 

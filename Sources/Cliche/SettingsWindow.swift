@@ -307,7 +307,7 @@ struct SettingsView: View {
                         HStack(spacing: 8) {
                             Keycap(t.key.uppercased())
                             Image(systemName: t.symbol).frame(width: 16)
-                            Text(t.title).font(.callout).lineLimit(1)
+                            Text(t.title).font(.callout).lineLimit(1).minimumScaleFactor(0.75)
                         }
                     }
                 }
@@ -395,9 +395,9 @@ struct SettingsView: View {
 // MARK: - Composants
 
 struct Card<Content: View>: View {
-    let title: String
+    let title: LocalizedStringKey
     let content: Content
-    init(_ title: String, @ViewBuilder content: () -> Content) { self.title = title; self.content = content() }
+    init(_ title: LocalizedStringKey, @ViewBuilder content: () -> Content) { self.title = title; self.content = content() }
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(title).font(.system(size: 12, weight: .semibold)).foregroundStyle(.secondary).textCase(.uppercase)
@@ -411,9 +411,9 @@ struct Card<Content: View>: View {
 }
 
 struct Row<Trailing: View>: View {
-    let label: String
+    let label: LocalizedStringKey
     let trailing: Trailing
-    init(_ label: String, @ViewBuilder trailing: () -> Trailing) { self.label = label; self.trailing = trailing() }
+    init(_ label: LocalizedStringKey, @ViewBuilder trailing: () -> Trailing) { self.label = label; self.trailing = trailing() }
     var body: some View { HStack { Text(label); Spacer(); trailing } }
 }
 
@@ -434,7 +434,7 @@ struct ShortcutButton: View {
     var body: some View {
         let rec = m.recording == action
         Button { rec ? m.stopRecording() : m.record(action) } label: {
-            Text(rec ? "Tapez le raccourci…" : (action.shortcut?.label ?? "Aucun"))
+            Text(rec ? String(localized: "Tapez le raccourci…") : (action.shortcut?.label ?? String(localized: "Aucun")))
                 .font(.system(size: 12, weight: .medium, design: .rounded))
                 .foregroundStyle(rec ? Color.white : (action.shortcut == nil ? Color.secondary : Color.primary))
                 .frame(minWidth: 120)
@@ -447,7 +447,8 @@ struct ShortcutButton: View {
 }
 
 struct Permission: View {
-    let title: String, detail: String, granted: Bool, pane: String
+    let title: LocalizedStringKey, detail: LocalizedStringKey
+    let granted: Bool, pane: String
     let request: () -> Void
     var body: some View {
         HStack(alignment: .top) {

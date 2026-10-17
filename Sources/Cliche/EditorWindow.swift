@@ -225,7 +225,8 @@ final class EditorWindowController: NSWindowController, NSWindowDelegate {
         if let e { s += "   ↔ \(e.width)  ↕ \(e.height)" }
         if let c, let fg = lastPickedColor {
             let r = ColorMath.contrastRatio(c, fg)
-            s += String(format: "   contraste %.2f (%@)", r, ColorMath.wcagGrade(r))
+            let ratio = String(format: "%.2f", r), grade = ColorMath.wcagGrade(r)
+            s += "   " + String(localized: "contraste \(ratio) (\(grade))")
         }
         status.stringValue = s
     }
@@ -233,7 +234,7 @@ final class EditorWindowController: NSWindowController, NSWindowDelegate {
     private var lastPickedColor: RGBA?
 
     private func updateTitle() {
-        window?.title = canvas.doc.backdrop == nil ? "Cliché" : "Cliché — fond"
+        window?.title = canvas.doc.backdrop == nil ? "Cliché" : String(localized: "Cliché — fond")
     }
 
     // MARK: Actions
@@ -297,12 +298,28 @@ final class EditorWindowController: NSWindowController, NSWindowDelegate {
         window?.close()
     }
 
+    /// Rendu hors écran : le style « minimal » du sélecteur de couleur ne se dessine pas en PDF.
+    func prepareForOffscreenRender() {
+        let swatch = SwatchView(frame: colorWell.bounds.insetBy(dx: 3, dy: 3))
+        swatch.color = colorWell.color
+        colorWell.addSubview(swatch)
+    }
+
     func windowWillClose(_ notification: Notification) { onClose?(self) }
 
     func show() {
         NSApp.activate(ignoringOtherApps: true)
         window?.makeKeyAndOrderFront(nil)
         window?.makeFirstResponder(canvas)
+    }
+}
+
+/// Pastille de couleur dessinée (pour le rendu PDF hors écran).
+final class SwatchView: NSView {
+    var color: NSColor = .systemRed
+    override func draw(_ dirtyRect: NSRect) {
+        color.setFill()
+        NSBezierPath(roundedRect: bounds, xRadius: 5, yRadius: 5).fill()
     }
 }
 

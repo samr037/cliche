@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1280, height=720" />
+<title>Cliché — démo</title>
+<!-- README demo video. Render: npx hyperframes render -c index.fr.html -o ../media/cliche-demo-fr.mp4 -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=block" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+  :root { --coral:#ff7a59; --pink:#f0436b; --plum:#b8237a; --sun:#ffd84d; --ink:#1d1a22; --muted:#4d4753;
+          --paper:#f6f1f2; --card:#ffffff; --red:#ef3a3a; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); font-family:"Hanken Grotesk", system-ui, sans-serif; color:var(--ink); }
+  #root { position:relative; width:1280px; height:720px; overflow:hidden;
+          background:radial-gradient(120% 90% at 50% 0%, #fffafa 0%, var(--paper) 60%, #eee3e6 100%); }
+  .clip { position:absolute; inset:0; }
+  .center { display:grid; place-items:center; }
+  .mono { font-family:"JetBrains Mono", monospace; }
+
+  /* Titre */
+  #title .stack { display:flex; flex-direction:column; align-items:center; gap:14px; }
+  #title img { width:176px; height:176px; }
+  #title h1 { margin:0; font-size:96px; font-weight:800; letter-spacing:-3px; color:var(--ink); }
+  #title p { margin:0; font-size:29px; color:var(--muted); font-weight:500; }
+
+  /* Bureau factice */
+  .desk { position:absolute; left:120px; top:30px; width:1040px; height:600px; border-radius:18px; overflow:hidden;
+          background:linear-gradient(135deg, #ffb199 0%, #f37ca0 45%, #8b6cd6 100%);
+          box-shadow:0 30px 80px rgba(60,20,40,.22), 0 0 0 1px rgba(0,0,0,.06); }
+  .menubar { position:absolute; left:0; right:0; top:0; height:26px; background:rgba(255,255,255,.55); backdrop-filter:blur(8px);
+             display:flex; align-items:center; gap:18px; padding:0 16px; font-size:13px; font-weight:600; color:#2a2530; }
+  .menubar .r { margin-left:auto; font-weight:500; }
+  .appwin { position:absolute; background:#fff; border-radius:12px; box-shadow:0 18px 50px rgba(30,10,30,.25); overflow:hidden; }
+  .appwin .bar { height:34px; background:#f4f2f5; border-bottom:1px solid #e7e3ea; display:flex; align-items:center; gap:7px; padding:0 13px; }
+  .dot { width:11px; height:11px; border-radius:50%; }
+  .appwin .bar .t { margin-left:10px; font-size:13px; color:var(--muted); font-weight:600; }
+
+  /* Fausse interface (réutilisée dans l'éditeur) */
+  .fake { position:absolute; inset:34px 0 0 0; display:flex; }
+  .fake .side { width:170px; background:#faf8fb; border-right:1px solid #eee9f0; padding:16px 14px; }
+  .fake .side div { height:12px; border-radius:6px; background:#e6e0ea; margin:0 0 16px; }
+  .fake .side div.on { background:#f6c6d3; }
+  .fake .main { flex:1; padding:22px 26px; position:relative; }
+  .fake h4 { margin:0 0 14px; font-size:22px; letter-spacing:-.4px; }
+  .fake .tile { position:absolute; border-radius:10px; background:#f7f3f8; border:1px solid #ece6ef; }
+  .fake .btn { position:absolute; border-radius:8px; background:#c92a59; color:#fff; font-size:14px; font-weight:600;
+               display:grid; place-items:center; }
+  .fake .line { position:absolute; height:10px; border-radius:5px; background:#e8e2ec; }
+  .fake .email { position:absolute; font-size:15px; color:#3a3440; font-weight:500; }
+
+  /* Sélection */
+  #shade { position:absolute; inset:0; background:rgba(15,8,20,.42); }
+  #sel { position:absolute; border:1.5px solid #fff; box-shadow:0 0 0 9999px rgba(15,8,20,.42); }
+  #cross-h, #cross-v { position:absolute; background:rgba(255,255,255,.75); }
+  #cross-h { left:0; right:0; height:1px; }
+  #cross-v { top:0; bottom:0; width:1px; }
+  #size { position:absolute; padding:7px 12px; border-radius:6px; background:rgba(0,0,0,.78); color:#fff; font-size:14px; }
+  #loupe { position:absolute; width:136px; height:136px; border-radius:12px; overflow:hidden; border:2px solid rgba(255,255,255,.9);
+           box-shadow:0 10px 30px rgba(0,0,0,.35); background:#111; display:grid; grid-template-columns:repeat(17, 8px); }
+  #loupe i { width:8px; height:8px; display:block; }
+  #loupe .mid { position:absolute; left:64px; top:64px; width:8px; height:8px; outline:1.5px solid #fff; }
+  #loupe-info { position:absolute; padding:6px 10px; border-radius:5px; background:rgba(0,0,0,.78); color:#fff; font-size:12px; }
+  .keys { position:absolute; display:flex; gap:10px; }
+  .key { min-width:66px; height:66px; padding:0 14px; border-radius:13px; background:#fff; border:1px solid #ddd5df; box-shadow:0 5px 0 #d2c8d5;
+         display:grid; place-items:center; font:600 28px "Hanken Grotesk", sans-serif; color:var(--ink); }
+  .klabel { position:absolute; font-size:19px; color:var(--muted); font-weight:500; }
+
+  /* Éditeur */
+  .editor { position:absolute; left:140px; top:40px; width:1000px; height:600px; border-radius:14px; overflow:hidden; background:#2a272e;
+            box-shadow:0 30px 80px rgba(40,10,30,.28), 0 0 0 1px rgba(0,0,0,.1); }
+  .tb { height:50px; background:#f3f0f4; border-bottom:1px solid #e3dde6; display:flex; align-items:center; gap:6px; padding:0 14px; }
+  .tb .tools { display:flex; gap:2px; margin-left:58px; background:#e7e2ea; border-radius:8px; padding:3px; }
+  .tb .tools span { width:30px; height:26px; border-radius:6px; display:grid; place-items:center; }
+  .tb .tools span.on { background:#fff; box-shadow:0 1px 2px rgba(0,0,0,.15); }
+  .tb svg { width:16px; height:16px; stroke:#3b3540; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  .tb .swatch { width:24px; height:24px; border-radius:6px; background:var(--red); margin-left:10px; box-shadow:inset 0 0 0 1px rgba(0,0,0,.15); }
+  .tb .pop { height:26px; padding:0 12px; border-radius:6px; background:#fff; border:1px solid #ddd6e0; font-size:12px; display:flex; align-items:center; color:#3b3540; }
+  .tb .act { margin-left:auto; display:flex; gap:6px; }
+  .tb .act span { width:30px; height:26px; border-radius:6px; background:#fff; border:1px solid #ddd6e0; display:grid; place-items:center; }
+  .canvas { position:absolute; left:40px; top:72px; width:920px; height:480px; background:#fff; border-radius:4px; overflow:hidden;
+            box-shadow:0 8px 30px rgba(0,0,0,.4); }
+  .status { position:absolute; left:0; right:0; bottom:0; height:28px; display:flex; align-items:center; padding:0 14px; gap:18px;
+            font-size:12px; color:#d6d0da; }
+  .status .r { margin-left:auto; }
+  #arrow-svg, #ruler-svg { position:absolute; inset:0; overflow:visible; }
+  #counter { position:absolute; width:40px; height:40px; border-radius:50%; background:var(--red); color:#fff; display:grid; place-items:center;
+             font-weight:800; font-size:21px; box-shadow:0 3px 8px rgba(0,0,0,.2); }
+  #mosaic { position:absolute; display:grid; grid-template-columns:repeat(30, 10px); overflow:hidden; border-radius:2px; }
+  #mosaic i { width:10px; height:10px; display:block; }
+  #rlabel { position:absolute; padding:6px 12px; border-radius:5px; background:var(--red); color:#fff; font:600 14px "JetBrains Mono", monospace; }
+  #toast { position:absolute; left:50%; top:654px; transform:translateX(-50%); padding:10px 20px; border-radius:22px; background:rgba(30,26,34,.88);
+           color:#fff; font-size:16px; font-weight:500; white-space:nowrap; }
+
+  /* Défilement */
+  #scroll .frame { position:absolute; left:240px; top:120px; width:380px; height:420px; border-radius:12px; overflow:hidden; background:#fff;
+                   box-shadow:0 20px 60px rgba(40,10,30,.2), 0 0 0 3px var(--pink); }
+  #scroll .page { position:absolute; left:0; top:0; width:380px; }
+  .row { height:64px; border-bottom:1px solid #f0eaf2; display:flex; align-items:center; gap:14px; padding:0 18px; }
+  .row b { width:36px; height:36px; border-radius:9px; flex:none; }
+  .row div { flex:1; }
+  .row div i { display:block; height:9px; border-radius:5px; background:#e5dfe9; margin:5px 0; }
+  #stitch { position:absolute; left:720px; top:96px; width:140px; height:528px; border-radius:10px; overflow:hidden; background:#fff;
+            box-shadow:0 20px 60px rgba(40,10,30,.2), 0 0 0 1px rgba(0,0,0,.06); }
+  #stitch .page { position:absolute; left:0; top:0; width:380px; transform-origin:0 0; transform:scale(.3692); }
+  #stitch-mask { position:absolute; left:0; right:0; bottom:0; background:#f6f1f2; }
+  #spill { position:absolute; left:240px; top:66px; padding:8px 16px; border-radius:20px; background:var(--plum); color:#fff;
+           font-size:16px; font-weight:600; display:flex; align-items:center; gap:9px; }
+  #spill .rec { width:9px; height:9px; border-radius:50%; background:#fff; }
+  #slabel { position:absolute; left:720px; top:58px; font-size:16px; color:var(--muted); font-weight:600; }
+  #sheight { position:absolute; left:876px; top:96px; font-size:15px; color:var(--muted); }
+
+  /* Atouts */
+  #features h3 { position:absolute; top:170px; left:0; right:0; text-align:center; margin:0; font-size:42px; letter-spacing:-1px; font-weight:800; }
+  #features .cards { position:absolute; left:90px; right:90px; top:270px; display:flex; gap:28px; }
+  .card { flex:1; background:var(--card); border-radius:22px; padding:32px 30px; box-shadow:0 18px 50px rgba(60,20,40,.10), 0 0 0 1px rgba(0,0,0,.04); }
+  .card .k { font:600 14px "JetBrains Mono", monospace; color:var(--plum); letter-spacing:1px; text-transform:uppercase; }
+  .card h2 { margin:0 0 10px; font-size:30px; letter-spacing:-.6px; }
+  .card p { margin:0; font-size:18.5px; color:var(--muted); line-height:1.45; }
+
+  /* Fin */
+  #outro { background:linear-gradient(135deg, #d8325e 0%, var(--plum) 60%, #7e1858 100%); color:#fff; }
+  #outro .stack { display:flex; flex-direction:column; align-items:center; gap:16px; }
+  #outro img { width:136px; height:136px; filter:drop-shadow(0 12px 30px rgba(80,0,40,.35)); }
+  #outro h1 { margin:0; font-size:76px; letter-spacing:-2px; font-weight:800; }
+  #outro .url { font:600 27px "JetBrains Mono", monospace; color:var(--sun); }
+  #outro .meta { font-size:21px; opacity:.9; font-weight:500; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="24" data-width="1280" data-height="720">
+
+  <section id="title" class="clip center" data-start="0" data-duration="3" data-track-index="1">
+    <div class="stack">
+      <img id="t-icon" src="icon.svg" alt="" />
+      <h1 id="t-name">Cliché</h1>
+      <p id="t-tag">Captures d'écran open source pour macOS. Capturer, annoter, mesurer.</p>
+    </div>
+  </section>
+
+  <!-- 2. Sélection de zone -->
+  <section id="select" class="clip" data-start="3" data-duration="5" data-track-index="1">
+    <div class="desk" id="desk">
+      <div class="menubar"><span></span><span>Finder</span><span style="font-weight:500">Fichier</span><span style="font-weight:500">Édition</span><span style="font-weight:500">Présentation</span><span class="r mono">sam. 9:41</span></div>
+      <div class="appwin" style="left:120px; top:70px; width:800px; height:470px">
+        <div class="bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div><span class="t">Tableau de bord</span></div>
+        <div class="fake">
+          <div class="side"><div class="on" style="width:80%"></div><div style="width:60%"></div><div style="width:72%"></div><div style="width:55%"></div><div style="width:66%"></div></div>
+          <div class="main">
+            <h4>Rapport mensuel</h4>
+            <div class="tile" style="left:26px; top:64px; width:250px; height:130px"></div>
+            <div class="tile" style="left:296px; top:64px; width:250px; height:130px"></div>
+            <div class="line" style="left:26px; top:222px; width:420px"></div>
+            <div class="line" style="left:26px; top:246px; width:360px"></div>
+            <div class="line" style="left:26px; top:270px; width:400px"></div>
+            <div class="btn" style="left:26px; top:316px; width:130px; height:40px">Exporter</div>
+          </div>
+        </div>
+      </div>
+      <div id="shade"></div>
+      <div id="sel"></div>
+      <div id="cross-h"></div><div id="cross-v"></div>
+      <div id="size" class="mono">1280 × 640</div>
+      <div id="loupe"></div>
+      <div id="loupe-info" class="mono">640, 320 · #F0436B</div>
+    </div>
+    <div class="keys" id="keys" style="left:120px; top:642px"><div class="key">⇧</div><div class="key">⌘</div><div class="key">2</div></div>
+  </section>
+
+  <!-- 3. Éditeur -->
+  <section id="edit" class="clip" data-start="8" data-duration="7" data-track-index="1">
+    <div class="editor" id="editor">
+      <div class="tb">
+        <div class="dot" style="background:#ff5f57; position:absolute; left:14px; top:19px"></div>
+        <div class="dot" style="background:#febc2e; position:absolute; left:31px; top:19px"></div>
+        <div class="dot" style="background:#28c840; position:absolute; left:48px; top:19px"></div>
+        <div class="tools">
+          <span><svg viewBox="0 0 16 16"><path d="M4 2 L4 13 L7 10 L9.5 14.5 L11 13.7 L8.6 9.3 L12.5 9 Z"/></svg></span>
+          <span class="on" id="tool-arrow"><svg viewBox="0 0 16 16"><path d="M3 13 L13 3 M7 3 H13 V9"/></svg></span>
+          <span><svg viewBox="0 0 16 16"><path d="M3 13 L13 3"/></svg></span>
+          <span><svg viewBox="0 0 16 16"><rect x="2.5" y="4" width="11" height="8" rx="1.5"/></svg></span>
+          <span><svg viewBox="0 0 16 16"><ellipse cx="8" cy="8" rx="5.5" ry="4.5"/></svg></span>
+          <span><svg viewBox="0 0 16 16"><path d="M4 4 H12 M8 4 V13"/></svg></span>
+          <span><svg viewBox="0 0 16 16"><path d="M2.5 11 C5 4, 7 14, 9.5 7 S13 6, 13.5 9"/></svg></span>
+          <span id="tool-mosaic"><svg viewBox="0 0 16 16"><rect x="2.5" y="2.5" width="5" height="5"/><rect x="8.5" y="8.5" width="5" height="5"/><rect x="8.5" y="2.5" width="5" height="5" opacity=".4"/><rect x="2.5" y="8.5" width="5" height="5" opacity=".4"/></svg></span>
+          <span><svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 L14 14"/></svg></span>
+          <span id="tool-counter"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><path d="M7 6 L8.3 5 V11"/></svg></span>
+          <span id="tool-ruler"><svg viewBox="0 0 16 16"><rect x="1.5" y="5.5" width="13" height="5" rx="1"/><path d="M4 5.5 V8 M7 5.5 V8.5 M10 5.5 V8 M13 5.5 V8"/></svg></span>
+          <span><svg viewBox="0 0 16 16"><path d="M4 1.5 V12 H14.5 M1.5 4 H12 V14.5"/></svg></span>
+        </div>
+        <div class="swatch"></div>
+        <div class="pop">4 px</div>
+        <div class="pop" id="stylepop">Effilée</div>
+        <div class="act">
+          <span><svg viewBox="0 0 16 16"><rect x="3" y="2.5" width="10" height="11" rx="1.5"/><path d="M5.5 6 H10.5 M5.5 8.5 H10.5 M5.5 11 H8.5"/></svg></span>
+          <span><svg viewBox="0 0 16 16"><path d="M8 2 V10 M5 7 L8 10 L11 7 M3 13.5 H13"/></svg></span>
+          <span><svg viewBox="0 0 16 16"><rect x="5" y="5" width="8.5" height="8.5" rx="1.5"/><path d="M3 10.5 V3.5 A1 1 0 0 1 4 2.5 H10.5"/></svg></span>
+        </div>
+      </div>
+      <div class="canvas">
+        <div class="fake" style="inset:0">
+          <div class="side"><div class="on" style="width:80%"></div><div style="width:60%"></div><div style="width:72%"></div><div style="width:55%"></div><div style="width:66%"></div></div>
+          <div class="main">
+            <h4>Rapport mensuel</h4>
+            <div class="tile" style="left:26px; top:64px; width:250px; height:130px"></div>
+            <div class="tile" id="tileB" style="left:296px; top:64px; width:250px; height:130px"></div>
+            <div class="line" style="left:26px; top:222px; width:420px"></div>
+            <div class="line" style="left:26px; top:246px; width:360px"></div>
+            <div class="email" style="left:26px; top:282px">Contact : julia.moore@acme-corp.com</div>
+            <div class="btn" id="exportBtn" style="left:26px; top:330px; width:130px; height:40px">Exporter</div>
+          </div>
+        </div>
+        <div id="mosaic"></div>
+        <svg id="ruler-svg" viewBox="0 0 920 480">
+          <g id="ruler" stroke="#ef3a3a" stroke-width="2" fill="none">
+            <line id="r-line" x1="472" y1="96" x2="472" y2="96"/>
+            <line id="r-t1" x1="472" y1="90" x2="472" y2="102"/>
+            <line id="r-t2" x1="472" y1="90" x2="472" y2="102"/>
+          </g>
+        </svg>
+        <div id="rlabel">184 px</div>
+        <svg id="arrow-svg" viewBox="0 0 920 480">
+          <path id="arrow" fill="#ef3a3a" d=""/>
+        </svg>
+        <div id="counter">1</div>
+      </div>
+      <div class="status mono"><span id="st">x 412  y 236   #FFFFFF   ↔ 250  ↕ 130</span><span class="r">100 %  ·  1840 × 960</span></div>
+    </div>
+    <div id="toast">Copié dans le presse-papiers</div>
+  </section>
+
+  <!-- 4. Capture défilante -->
+  <section id="scroll" class="clip" data-start="15" data-duration="4" data-track-index="1">
+    <div id="spill"><span class="rec"></span>Capture défilante</div>
+    <div class="frame"><div class="page" id="page"></div></div>
+    <div id="slabel">Résultat assemblé</div>
+    <div id="stitch"><div class="page" id="page2"></div><div id="stitch-mask"></div></div>
+    <div id="sheight" class="mono">0 px</div>
+  </section>
+
+  <section id="features" class="clip" data-start="19" data-duration="3" data-track-index="1">
+    <h3 id="f-title">Une capture d'écran soignée jusqu'au pixel.</h3>
+    <div class="cards">
+      <div class="card"><h2>Annoter</h2><p>14 outils : flèches, formes, texte, compteurs, projecteur, flou et pixels, avec annulation.</p></div>
+      <div class="card"><h2>Mesurer</h2><p>La règle trouve les bords. Pipette HEX, OKLCH et contraste.</p></div>
+      <div class="card"><h2>Défiler · OCR</h2><p>Assemble les longues pages, copie texte et QR codes, épingle au-dessus de vos fenêtres.</p></div>
+    </div>
+  </section>
+
+  <section id="outro" class="clip center" data-start="22" data-duration="2" data-track-index="1">
+    <div class="stack">
+      <img id="o-icon" src="icon.svg" alt="" />
+      <h1>Cliché</h1>
+      <div class="url">github.com/samr037/cliche</div>
+      <div class="meta">Libre et open source · MIT</div>
+    </div>
+  </section>
+</div>
+
+<script>
+  // ---------- Construction des éléments répétitifs ----------
+  // Loupe : 17×17 cellules, bord rose du bouton au centre.
+  const loupe = document.getElementById("loupe");
+  let cells = "";
+  for (let y = 0; y < 17; y++) for (let x = 0; x < 17; x++) {
+    let c = "#ffffff";
+    if (x >= 8 && y >= 8) c = "#f0436b";
+    if ((x === 8 || y === 8) && x >= 8 && y >= 8) c = "#f25a7c";
+    if (y < 4 && x > 3 && x < 13) c = "#ece6ef";
+    cells += `<i style="background:${c}"></i>`;
+  }
+  loupe.innerHTML = cells + '<div class="mid"></div>';
+
+  // Mosaïque qui masque l'e-mail (24×3 blocs de 10 px).
+  const mosaic = document.getElementById("mosaic");
+  const tones = ["#d9d3dd", "#c9c2cf", "#e7e2ea", "#bdb5c4", "#efebf1", "#d2cbd8"];
+  let m = "";
+  for (let i = 0; i < 90; i++) m += `<i style="background:${tones[(i * 7 + (i >> 3)) % tones.length]}"></i>`;
+  mosaic.innerHTML = m;
+
+  // Page longue pour la capture défilante.
+  const colors = ["#ff7a59", "#f0436b", "#b8237a", "#ffd84d", "#8b6cd6", "#4fb6a5"];
+  let rows = "";
+  for (let i = 0; i < 22; i++) {
+    rows += `<div class="row"><b style="background:${colors[i % colors.length]}"></b><div><i style="width:${55 + (i * 23) % 40}%"></i><i style="width:${35 + (i * 31) % 45}%"></i></div></div>`;
+  }
+  document.getElementById("page").innerHTML = rows;
+  document.getElementById("page2").innerHTML = rows;
+
+  // ---------- Géométrie de la flèche effilée (comme Renderer.drawArrow .classic) ----------
+  function arrowPath(fx, fy, tx, ty, w) {
+    const len = Math.hypot(tx - fx, ty - fy);
+    if (len < 2) return "";
+    const ux = (tx - fx) / len, uy = (ty - fy) / len, nx = -uy, ny = ux;
+    const headLen = Math.min(len * .6, Math.max(12, w * 4.5)), half = Math.max(7, w * 2.6);
+    const P = (bx, by, a, c) => [bx + ux * a + nx * c, by + uy * a + ny * c];
+    const neck = P(tx, ty, -headLen * .82, 0);
+    const pts = [P(fx, fy, 0, w * .15), P(neck[0], neck[1], 0, w * .6), P(tx, ty, -headLen, half), [tx, ty],
+                 P(tx, ty, -headLen, -half), P(neck[0], neck[1], 0, -w * .6), P(fx, fy, 0, -w * .15)];
+    return "M" + pts.map(p => p[0].toFixed(1) + " " + p[1].toFixed(1)).join(" L") + " Z";
+  }
+
+  // Canvas : 920×480. Bouton Export en (196, 330)-(326, 370) (side 170 + main padding 26).
+  const A = { fx: 470, fy: 420, tx: 336, ty: 360 };
+  const arrowEl = document.getElementById("arrow");
+  const arrowState = { t: 0 };
+  function drawArrow() {
+    const x = A.fx + (A.tx - A.fx) * arrowState.t, y = A.fy + (A.ty - A.fy) * arrowState.t;
+    arrowEl.setAttribute("d", arrowPath(A.fx, A.fy, x, y, 7));
+  }
+  drawArrow();
+
+  // Règle : bord gauche de la tuile B (x = 170+26+296 = 492) jusqu'au bord droit + ... on mesure l'espace vertical
+  // On mesure la largeur de la tuile B : 250 css px → libellé « 184 px » est décoratif (échelle de la capture).
+  const R = { x1: 492, x2: 742, y: 210 };
+  const rulerState = { t: 0 };
+  function drawRuler() {
+    const x = R.x1 + (R.x2 - R.x1) * rulerState.t;
+    const L = document.getElementById("r-line");
+    L.setAttribute("x1", R.x1); L.setAttribute("y1", R.y); L.setAttribute("x2", x); L.setAttribute("y2", R.y);
+    for (const [id, xx] of [["r-t1", R.x1], ["r-t2", x]]) {
+      const t = document.getElementById(id);
+      t.setAttribute("x1", xx); t.setAttribute("x2", xx); t.setAttribute("y1", R.y - 7); t.setAttribute("y2", R.y + 7);
+    }
+  }
+  drawRuler();
+
+  // ---------- Placement initial ----------
+  gsap.set("#sel", { left: 300, top: 160, width: 0, height: 0 });
+  gsap.set("#cross-h", { top: 160 }); gsap.set("#cross-v", { left: 300 });
+  gsap.set("#size", { left: 300, top: 126, opacity: 0 });
+  gsap.set("#loupe", { left: 330, top: 190 });
+  gsap.set("#loupe-info", { left: 330, top: 332 });
+  gsap.set("#mosaic", { left: 192, top: 282, width: 0, height: 30 });
+  gsap.set("#counter", { left: 316, top: 316, scale: 0, opacity: 0 });
+  gsap.set("#rlabel", { left: 586, top: 176, opacity: 0 });
+  gsap.set("#toast", { opacity: 0, y: 10 });
+  gsap.set("#stitch-mask", { top: 0 });
+
+  const tl = gsap.timeline({ paused: true });
+
+  // 1. Titre (0 → 3)
+  tl.fromTo("#t-icon", { scale: .6, opacity: 0, rotation: -12 }, { scale: 1, opacity: 1, rotation: 0, duration: .8, ease: "back.out(1.6)" }, .15);
+  tl.fromTo("#t-name", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: .6, ease: "power3.out" }, .5);
+  tl.fromTo("#t-tag", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: .6, ease: "power3.out" }, .8);
+  tl.to("#title .stack", { opacity: 0, y: -30, duration: .4, ease: "power2.in" }, 2.6);
+
+  // 2. Sélection (3 → 8)
+  const S = 3;
+  tl.fromTo("#desk", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: .5, ease: "power3.out" }, S);
+  tl.fromTo("#keys .key", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: .3, stagger: .08 }, S + .3);
+  tl.to("#keys .key", { y: 5, boxShadow: "0 0 0 #d2c8d5, 0 0 0 6px rgba(240,67,107,.22)", background: "#fff0f4", duration: .12 }, S + .9);
+  tl.to("#keys .key", { y: 0, boxShadow: "0 5px 0 #d2c8d5", background: "#fff", duration: .12 }, S + 1.2);
+  tl.fromTo(["#shade", "#cross-h", "#cross-v", "#loupe", "#loupe-info"], { opacity: 0 }, { opacity: 1, duration: .25 }, S + 1.05);
+  tl.set("#sel", { opacity: 0 }, 0);
+  // Le curseur se déplace un peu avant le glisser (la loupe suit).
+  tl.to("#cross-h", { top: 132, duration: .5, ease: "power2.inOut" }, S + 1.4);
+  tl.to("#cross-v", { left: 236, duration: .5, ease: "power2.inOut" }, S + 1.4);
+  tl.to("#loupe", { left: 266, top: 162, duration: .5, ease: "power2.inOut" }, S + 1.4);
+  tl.to("#loupe-info", { left: 266, top: 304, duration: .5, ease: "power2.inOut" }, S + 1.4);
+  // Glisser : la sélection s'ouvre jusqu'à 640×320 pt (1280×640 px Retina).
+  tl.set("#sel", { opacity: 1, left: 236, top: 132, width: 0, height: 0 }, S + 2);
+  tl.set("#shade", { opacity: 0 }, S + 2);
+  tl.to("#size", { opacity: 1, duration: .2 }, S + 2);
+  const drag = { w: 0, h: 0 };
+  tl.to(drag, { w: 640, h: 320, duration: 1.4, ease: "power2.inOut", onUpdate: () => {
+    gsap.set("#sel", { width: drag.w, height: drag.h });
+    gsap.set("#cross-v", { left: 236 + drag.w });
+    gsap.set("#cross-h", { top: 132 + drag.h });
+    gsap.set("#loupe", { left: Math.min(236 + drag.w + 24, 880), top: 132 + drag.h + 24 > 440 ? 132 + drag.h - 160 : 132 + drag.h + 24 });
+    gsap.set("#loupe-info", { left: Math.min(236 + drag.w + 24, 880), top: (132 + drag.h + 24 > 440 ? 132 + drag.h - 160 : 132 + drag.h + 24) + 142 });
+    document.getElementById("size").textContent = `${Math.round(drag.w * 2)} × ${Math.round(drag.h * 2)}`;
+  } }, S + 2);
+  tl.set("#size", { left: 236, top: 98 }, S + 2);
+  tl.to(["#cross-h", "#cross-v", "#loupe", "#loupe-info"], { opacity: 0, duration: .2 }, S + 3.6);
+  tl.to("#sel", { boxShadow: "0 0 0 9999px rgba(255,255,255,1)", borderColor: "rgba(255,255,255,0)", duration: .18, yoyo: true, repeat: 1 }, S + 3.8);
+  tl.to(["#desk", "#keys"], { opacity: 0, y: -20, duration: .4, ease: "power2.in" }, S + 4.55);
+
+  // 3. Éditeur (8 → 15)
+  const E = 8;
+  tl.fromTo("#editor", { y: 40, opacity: 0, scale: .97 }, { y: 0, opacity: 1, scale: 1, duration: .55, ease: "power3.out" }, E);
+  // Flèche tracée vers le bouton Export.
+  tl.to(arrowState, { t: 1, duration: .7, ease: "power2.out", onUpdate: drawArrow }, E + .7);
+  tl.set("#st", { textContent: "x 672  y 720   #FFFFFF   ↔ 1840  ↕ 182" }, E + .7);
+  // Compteur.
+  tl.to("#tool-arrow", { background: "transparent", boxShadow: "none", duration: .1 }, E + 1.6);
+  tl.to("#tool-counter", { background: "#fff", boxShadow: "0 1px 2px rgba(0,0,0,.15)", duration: .1 }, E + 1.6);
+  tl.set("#stylepop", { textContent: "Plein" }, E + 1.6);
+  tl.to("#counter", { scale: 1, opacity: 1, duration: .4, ease: "back.out(2.4)" }, E + 1.8);
+  // Pixellisation de l'e-mail.
+  tl.to("#tool-counter", { background: "transparent", boxShadow: "none", duration: .1 }, E + 2.5);
+  tl.to("#tool-mosaic", { background: "#fff", boxShadow: "0 1px 2px rgba(0,0,0,.15)", duration: .1 }, E + 2.5);
+  tl.set("#stylepop", { textContent: "Pixels" }, E + 2.5);
+  tl.to("#mosaic", { width: 300, duration: .7, ease: "power2.inOut" }, E + 2.7);
+  // Règle intelligente.
+  tl.to("#tool-mosaic", { background: "transparent", boxShadow: "none", duration: .1 }, E + 3.6);
+  tl.to("#tool-ruler", { background: "#fff", boxShadow: "0 1px 2px rgba(0,0,0,.15)", duration: .1 }, E + 3.6);
+  tl.set("#stylepop", { autoAlpha: 0 }, E + 3.6);   // la règle n'a pas de menu de style
+  tl.set("#st", { textContent: "x 984  y 420   #F7F3F8   ↔ 184  ↕ 96" }, E + 3.6);
+  tl.to(rulerState, { t: 1, duration: .6, ease: "power2.out", onUpdate: drawRuler }, E + 3.8);
+  tl.fromTo("#rlabel", { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: .3, ease: "back.out(2)" }, E + 4.3);
+  // Copie.
+  tl.to("#toast", { opacity: 1, y: 0, duration: .3, ease: "power3.out" }, E + 5.1);
+  tl.to(["#editor", "#toast"], { opacity: 0, y: -20, duration: .4, ease: "power2.in" }, E + 6.55);
+
+  // 4. Capture défilante (15 → 19)
+  const C = 15;
+  tl.fromTo(["#spill", "#scroll .frame", "#slabel", "#stitch", "#sheight"], { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .45, stagger: .06, ease: "power3.out" }, C);
+  tl.to("#spill .rec", { opacity: .2, duration: .35, yoyo: true, repeat: 7 }, C + .3);
+  // La page défile dans le cadre ; l'assemblage se dévoile de haut en bas.
+  tl.to("#page", { y: -(22 * 65 - 420), duration: 2.6, ease: "none" }, C + .5);
+  const stitchH = { h: 0 };
+  tl.to(stitchH, { h: 528, duration: 2.6, ease: "none", onUpdate: () => {
+    gsap.set("#stitch-mask", { top: stitchH.h });
+    document.getElementById("sheight").textContent = `${Math.round(stitchH.h / 528 * 2860)} px`;
+  } }, C + .5);
+  tl.to(["#spill", "#scroll .frame", "#slabel", "#stitch", "#sheight"], { opacity: 0, y: -20, duration: .4, ease: "power2.in" }, C + 3.55);
+
+  // 5. Atouts (19 → 22)
+  tl.fromTo("#f-title", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: .5, ease: "power3.out" }, 19.1);
+  tl.fromTo("#features .card", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: .6, ease: "power3.out", stagger: .15 }, 19.3);
+  tl.to("#features .cards, #f-title", { opacity: 0, duration: .3 }, 21.7);
+
+  // 6. Fin (22 → 24)
+  tl.fromTo("#outro .stack > *", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: .5, ease: "power3.out", stagger: .1 }, 22.1);
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines.main = tl;
+</script>
+</body>
+</html>

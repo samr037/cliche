@@ -1,0 +1,473 @@
+/* Italiano. Chiavi = testo sorgente francese. */
+
+/* CanvasView.swift:47 */
+"Sélection" = "Selezione";
+
+/* CanvasView.swift:48 */
+"Flèche" = "Freccia";
+
+/* CanvasView.swift:49 */
+"Ligne" = "Linea";
+
+/* CanvasView.swift:50 */
+"Rectangle" = "Rettangolo";
+
+/* CanvasView.swift:51 */
+"Ovale" = "Ovale";
+
+/* CanvasView.swift:52 */
+"Texte" = "Testo";
+
+/* CanvasView.swift:53 */
+"Main levée" = "Mano libera";
+
+/* CanvasView.swift:54 */
+"Surligneur" = "Evidenziatore";
+
+/* CanvasView.swift:55 */
+"Masquer (flou, pixels, effacer)" = "Nascondi (sfocatura, pixel, cancella)";
+
+/* CanvasView.swift:56 */
+"Projecteur" = "Riflettore";
+
+/* CanvasView.swift:57 */
+"Loupe" = "Lente";
+
+/* CanvasView.swift:58 */
+"Compteur" = "Contatore";
+
+/* CanvasView.swift:59 */
+"Règle" = "Righello";
+
+/* CanvasView.swift:60 */
+"Recadrer" = "Ritaglia";
+
+/* Capture.swift:17 */
+"Cliché a besoin de l'autorisation « Enregistrement de l'écran »." = "Cliché richiede l'autorizzazione « Registrazione schermo ».";
+
+/* Capture.swift:18 */
+"Aucun écran trouvé." = "Nessuno schermo trovato.";
+
+/* EditorWindow.swift:65 */
+"Sans fond" = "Senza sfondo";
+
+/* EditorWindow.swift:65 */
+"Dégradé violet" = "Gradiente viola";
+
+/* EditorWindow.swift:66 */
+"Dégradé corail" = "Gradiente corallo";
+
+/* EditorWindow.swift:66 */
+"Dégradé lagon" = "Gradiente laguna";
+
+/* EditorWindow.swift:67 */
+"Ardoise" = "Ardesia";
+
+/* EditorWindow.swift:67 */
+"Mesh pastel" = "Mesh pastello";
+
+/* EditorWindow.swift:67 */
+"Gris clair" = "Grigio chiaro";
+
+/* EditorWindow.swift:68 */
+"Fond décoratif (appliqué à l'export)" = "Sfondo decorativo (applicato all'esportazione)";
+
+/* EditorWindow.swift:78 */
+"Copier le texte (OCR)" = "Copia testo (OCR)";
+
+/* EditorWindow.swift:79 */
+"Épingler à l'écran (⌘P)" = "Fissa sullo schermo (⌘P)";
+
+/* EditorWindow.swift:80 */
+"Enregistrer (⌘S)" = "Salva (⌘S)";
+
+/* EditorWindow.swift:81 */
+"Copier (⌘C)" = "Copia (⌘C)";
+
+/* EditorWindow.swift:161 */
+"Effilée" = "Affusolata";
+
+/* EditorWindow.swift:161 */
+"Trait" = "Tratto";
+
+/* EditorWindow.swift:161 */
+"Double" = "Doppia";
+
+/* EditorWindow.swift:161 */
+"Ouverte" = "Aperta";
+
+/* EditorWindow.swift:164 */
+"Contour" = "Contorno";
+
+/* EditorWindow.swift:164 */
+"Plein" = "Pieno";
+
+/* EditorWindow.swift:164 */
+"Contour sur blanc" = "Contorno su bianco";
+
+/* EditorWindow.swift:167 */
+"Flou" = "Sfocatura";
+
+/* EditorWindow.swift:167 */
+"Pixels" = "Pixel";
+
+/* EditorWindow.swift:167 */
+"Effacer" = "Cancella";
+
+/* EditorWindow.swift:170 */
+"Simple" = "Semplice";
+
+/* EditorWindow.swift:170 */
+"Pastille" = "Etichetta";
+
+/* EditorWindow.swift:173 */
+"Correction de forme" = "Correzione forma";
+
+/* EditorWindow.swift:173 */
+"Tracé libre" = "Tratto libero";
+
+/* EditorWindow.swift:229 */
+"contraste %@ (%@)" = "contrasto %@ (%@)";
+
+/* EditorWindow.swift:237 */
+"Cliché — fond" = "Cliché — sfondo";
+
+/* EditorWindow.swift:245 */
+"Copié dans le presse-papiers" = "Copiato negli appunti";
+
+/* EditorWindow.swift:251 */
+"Enregistré : %@" = "Salvato: %@";
+
+/* EditorWindow.swift:276 */
+"Aucun texte détecté" = "Nessun testo rilevato";
+
+/* EditorWindow.swift:279 */
+"Texte copié" = "Testo copiato";
+
+/* Hotkeys.swift:52 */
+"Espace" = "Spazio";
+
+/* Hotkeys.swift:80 */
+"Capture plein écran" = "Cattura a tutto schermo";
+
+/* Hotkeys.swift:81 */
+"Capture de zone" = "Cattura di un'area";
+
+/* Hotkeys.swift:82 */
+"Répéter la capture de zone" = "Ripeti la cattura di un'area";
+
+/* Hotkeys.swift:83 */
+"Capture de fenêtre" = "Cattura di una finestra";
+
+/* Hotkeys.swift:84 */
+"Capture défilante" = "Cattura a scorrimento";
+
+/* Hotkeys.swift:85 */
+"Reconnaître le texte (OCR / QR)" = "Riconosci testo (OCR / QR)";
+
+/* Hotkeys.swift:86 */
+"Capture plein écran différée (3 s)" = "Cattura a tutto schermo ritardata (3 s)";
+
+/* Hotkeys.swift:87 */
+"Ouvrir depuis le presse-papiers" = "Apri dagli appunti";
+
+/* Output.swift:32 */
+"Échec de l'enregistrement : %@" = "Salvataggio non riuscito: %@";
+
+/* Panels.swift:69 */
+"Copier" = "Copia";
+
+/* Panels.swift:70 */
+"Taille réelle" = "Dimensioni reali";
+
+/* Panels.swift:71 */
+"Fermer" = "Chiudi";
+
+/* Panels.swift:173 */
+"Enregistrer" = "Salva";
+
+/* Panels.swift:174 */
+"Épingler" = "Fissa";
+
+/* Panels.swift:208 */
+"Copié" = "Copiato";
+
+/* ScrollCapture.swift:52 */
+"Hauteur maximale atteinte" = "Altezza massima raggiunta";
+
+/* ScrollCapture.swift:87 */
+"Capture défilante… Échap ou clic pour arrêter" = "Cattura a scorrimento… Esc o clic per interrompere";
+
+/* SettingsWindow.swift:13 */
+"Général" = "Generali";
+
+/* SettingsWindow.swift:14 */
+"Capture" = "Cattura";
+
+/* SettingsWindow.swift:15 */
+"Éditeur" = "Editor";
+
+/* SettingsWindow.swift:16 */
+"Défilement" = "Scorrimento";
+
+/* SettingsWindow.swift:17 */
+"Raccourcis" = "Abbreviazioni";
+
+/* SettingsWindow.swift:18 */
+"À propos" = "Info";
+
+/* SettingsWindow.swift:166 */
+"Cliché" = "Cliché";
+
+/* SettingsWindow.swift:167 */
+"v%@" = "v%@";
+
+/* SettingsWindow.swift:211 */
+"Après une capture" = "Dopo una cattura";
+
+/* SettingsWindow.swift:212 */
+"Afficher" = "Mostra";
+
+/* SettingsWindow.swift:214 */
+"Vignette" = "Miniatura";
+
+/* SettingsWindow.swift:216 */
+"Rien" = "Niente";
+
+/* SettingsWindow.swift:220 */
+"Copier dans le presse-papiers" = "Copia negli appunti";
+
+/* SettingsWindow.swift:221 */
+"Enregistrer dans le dossier" = "Salva nella cartella";
+
+/* SettingsWindow.swift:224 */
+"Vignette visible" = "Durata miniatura";
+
+/* SettingsWindow.swift:226 */
+"4 s" = "4 s";
+
+/* SettingsWindow.swift:226 */
+"6 s" = "6 s";
+
+/* SettingsWindow.swift:226 */
+"10 s" = "10 s";
+
+/* SettingsWindow.swift:226 */
+"Jusqu'au clic" = "Fino al clic";
+
+/* SettingsWindow.swift:231 */
+"Enregistrement" = "Salvataggio";
+
+/* SettingsWindow.swift:232 */
+"Dossier" = "Cartella";
+
+/* SettingsWindow.swift:235 */
+"Choisir…" = "Scegli…";
+
+/* SettingsWindow.swift:239 */
+"Format" = "Formato";
+
+/* SettingsWindow.swift:244 */
+"Réduire les captures Retina à 1×" = "Riduci le catture Retina a 1×";
+
+/* SettingsWindow.swift:246 */
+"Système" = "Sistema";
+
+/* SettingsWindow.swift:247 */
+"Ouvrir Cliché à l'ouverture de session" = "Apri Cliché al login";
+
+/* SettingsWindow.swift:249 */
+"Enregistrement de l'écran" = "Registrazione schermo";
+
+/* SettingsWindow.swift:249 */
+"Indispensable pour toute capture." = "Necessaria per qualsiasi cattura.";
+
+/* SettingsWindow.swift:251 */
+"Accessibilité" = "Accessibilità";
+
+/* SettingsWindow.swift:251 */
+"Seulement pour la capture défilante (molette simulée)." = "Solo per la cattura a scorrimento (rotella simulata).";
+
+/* SettingsWindow.swift:262 */
+"Image" = "Immagine";
+
+/* SettingsWindow.swift:263 */
+"Inclure le curseur" = "Includi il puntatore";
+
+/* SettingsWindow.swift:264 */
+"Garder l'ombre des fenêtres" = "Mantieni l'ombra delle finestre";
+
+/* SettingsWindow.swift:266 */
+"Texte et QR codes" = "Testo e codici QR";
+
+/* SettingsWindow.swift:267 */
+"Joindre les lignes reconnues (sans retours à la ligne)" = "Unisci le righe riconosciute (senza a capo)";
+
+/* SettingsWindow.swift:268 */
+"La reconnaissance se fait sur le Mac avec Vision ; rien n'est envoyé en ligne." = "Il riconoscimento avviene sul Mac con Vision; nulla viene inviato online.";
+
+/* SettingsWindow.swift:276 */
+"Outils" = "Strumenti";
+
+/* SettingsWindow.swift:277 */
+"Couleur par défaut" = "Colore predefinito";
+
+/* SettingsWindow.swift:289 */
+"Épaisseur" = "Spessore";
+
+/* SettingsWindow.swift:292 */
+"%lld px" = "%lld px";
+
+/* SettingsWindow.swift:295 */
+"Format de couleur (pipette)" = "Formato colore (contagocce)";
+
+/* SettingsWindow.swift:301 */
+"Fermeture" = "Chiusura";
+
+/* SettingsWindow.swift:302 */
+"Échap copie l'image avant de fermer l'éditeur" = "Esc copia l'immagine prima di chiudere l'editor";
+
+/* SettingsWindow.swift:304 */
+"Raccourcis de l'éditeur" = "Abbreviazioni dell'editor";
+
+/* SettingsWindow.swift:321 */
+"Hauteur maximale" = "Altezza massima";
+
+/* SettingsWindow.swift:327 */
+"Vitesse" = "Velocità";
+
+/* SettingsWindow.swift:335 */
+"Inverser le sens (si un utilitaire inverse déjà la molette)" = "Inverti la direzione (se un'utility inverte già la rotella)";
+
+/* SettingsWindow.swift:337 */
+"Choisissez la zone qui défile : Cliché fait défiler la page, recolle les images et retire les barres fixes (en-tête, pied). Échap ou un clic arrête." = "Scegli l'area che scorre: Cliché fa scorrere la pagina, ricompone le immagini e rimuove le barre fisse (intestazione, piè di pagina). Esc o un clic interrompe.";
+
+/* SettingsWindow.swift:344 */
+"Raccourcis globaux" = "Abbreviazioni globali";
+
+/* SettingsWindow.swift:353 */
+"Ce raccourci est déjà utilisé par une autre app" = "Questa abbreviazione è già usata da un'altra app";
+
+/* SettingsWindow.swift:360 */
+"Cliquez puis tapez une combinaison. ⌫ efface, Échap annule." = "Fai clic e digita una combinazione. ⌫ cancella, Esc annulla.";
+
+/* SettingsWindow.swift:362 */
+"Rétablir les raccourcis par défaut" = "Ripristina le abbreviazioni predefinite";
+
+/* SettingsWindow.swift:364 */
+"Schéma d'URL" = "Schema URL";
+
+/* SettingsWindow.swift:365 */
+"Autoriser les liens cliche:// (apps et pages web)" = "Consenti i link cliche:// (app e pagine web)";
+
+/* SettingsWindow.swift:366 */
+"cliche://grab/area · grab/fullscreen · grab/window · grab/scrolling · grab/area/repeat · ocr · load/clipboard" = "cliche://grab/area · grab/fullscreen · grab/window · grab/scrolling · grab/area/repeat · ocr · load/clipboard";
+
+/* SettingsWindow.swift:368 */
+"Pratique depuis Raccourcis, Raycast ou Alfred : open \"cliche://grab/area\"" = "Utile da Comandi rapidi, Raycast o Alfred: open \"cliche://grab/area\"";
+
+/* SettingsWindow.swift:378 */
+"Captures d'écran open source pour macOS.\nCapturer, annoter, mesurer." = "Catture dello schermo open source per macOS.\nCattura, annota, misura.";
+
+/* SettingsWindow.swift:379 */
+"Version %@ · Licence MIT" = "Versione %@ · Licenza MIT";
+
+/* SettingsWindow.swift:381 */
+"Code source" = "Codice sorgente";
+
+/* SettingsWindow.swift:383 */
+"Signaler un problème" = "Segnala un problema";
+
+/* SettingsWindow.swift:437 */
+"Tapez le raccourci…" = "Digita l'abbreviazione…";
+
+/* SettingsWindow.swift:437 */
+"Aucun" = "Nessuna";
+
+/* SettingsWindow.swift:463 */
+"Autoriser…" = "Consenti…";
+
+/* SettingsWindow.swift:475 */
+"Réglages de Cliché" = "Impostazioni di Cliché";
+
+/* Snapshots.swift:59 */
+"Latence ici" = "Latenza qui";
+
+/* main.swift:55 */
+"Ouvrir une image…" = "Apri un'immagine…";
+
+/* main.swift:58 */
+"Réglages…" = "Impostazioni…";
+
+/* main.swift:62 */
+"Quitter Cliché" = "Esci da Cliché";
+
+/* main.swift:80 */
+"Quitter" = "Esci";
+
+/* main.swift:81 */
+"Fichier" = "Archivio";
+
+/* main.swift:82 */
+"Enregistrer sous…" = "Salva come…";
+
+/* main.swift:85 */
+"Édition" = "Composizione";
+
+/* main.swift:85 */
+"Annuler" = "Annulla";
+
+/* main.swift:86 */
+"Rétablir" = "Ripristina";
+
+/* main.swift:88 */
+"Coller" = "Incolla";
+
+/* main.swift:89 */
+"Tout sélectionner" = "Seleziona tutto";
+
+/* main.swift:90 */
+"Présentation" = "Vista";
+
+/* main.swift:90 */
+"Zoom avant" = "Ingrandisci";
+
+/* main.swift:91 */
+"Zoom arrière" = "Riduci";
+
+/* main.swift:93 */
+"Ajuster à la fenêtre" = "Adatta alla finestra";
+
+/* main.swift:130 */
+"Capture dans 3 s…" = "Cattura tra 3 s…";
+
+/* main.swift:135 */
+"Faites d'abord une capture de zone" = "Fai prima una cattura di un'area";
+
+/* main.swift:144 */
+"La capture défilante demande l'autorisation Accessibilité" = "La cattura a scorrimento richiede l'autorizzazione Accessibilità";
+
+/* main.swift:167 */
+"Texte copié : %@" = "Testo copiato: %@";
+
+/* main.swift:172 */
+"Pas d'image dans le presse-papiers" = "Nessuna immagine negli appunti";
+
+/* main.swift:225 */
+"Capturé" = "Catturata";
+
+/* main.swift:240 */
+"Lien cliche:// refusé" = "Link cliche:// rifiutato";
+
+/* main.swift:246 */
+"Autoriser les liens cliche:// ?" = "Consentire i link cliche://?";
+
+/* main.swift:247 */
+"Une app ou une page web demande « %@ ». Si vous autorisez, les liens cliche:// pourront lancer des captures sans confirmation. Modifiable dans Réglages › Raccourcis." = "Un'app o una pagina web richiede « %@ ». Se consenti, i link cliche:// potranno avviare catture senza conferma. Modificabile in Impostazioni › Abbreviazioni.";
+
+/* main.swift:248 */
+"Autoriser" = "Consenti";
+
+/* main.swift:249 */
+"Refuser" = "Rifiuta";
+
