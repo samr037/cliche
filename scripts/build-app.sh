@@ -8,7 +8,7 @@ set -e
 cd "$(dirname "$0")/.."
 BUILD="${CLICHE_BUILD:-/tmp/cliche-build}"
 APP="${CLICHE_APP:-$HOME/Applications/Cliché.app}"
-IDENTITY="${CLICHE_SIGN:-WisprLocal Dev}"
+IDENTITY="${CLICHE_SIGN:--}"
 swift build -c release --product Cliche --scratch-path "$BUILD"
 BIN="$(swift build -c release --product Cliche --scratch-path "$BUILD" --show-bin-path)/Cliche"
 rm -rf "$APP/Contents/MacOS"
