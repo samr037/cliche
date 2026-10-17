@@ -6,13 +6,13 @@
 <title>Cliché — demo</title>
 <!-- README demo video. Render: npx hyperframes render -c index.html -o ../media/cliche-demo.mp4 -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=block" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=block" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
 <style>
   :root { --coral:#ff7a59; --pink:#f0436b; --plum:#b8237a; --sun:#ffd84d; --ink:#1d1a22; --muted:#4d4753;
           --paper:#f6f1f2; --card:#ffffff; --red:#ef3a3a; }
   * { box-sizing:border-box; }
-  body { margin:0; background:var(--paper); font-family:"Inter", system-ui, sans-serif; color:var(--ink); }
+  body { margin:0; background:var(--paper); font-family:"Hanken Grotesk", system-ui, sans-serif; color:var(--ink); }
   #root { position:relative; width:1280px; height:720px; overflow:hidden;
           background:radial-gradient(120% 90% at 50% 0%, #fffafa 0%, var(--paper) 60%, #eee3e6 100%); }
   .clip { position:absolute; inset:0; }
@@ -56,15 +56,15 @@
   #cross-h, #cross-v { position:absolute; background:rgba(255,255,255,.75); }
   #cross-h { left:0; right:0; height:1px; }
   #cross-v { top:0; bottom:0; width:1px; }
-  #size { position:absolute; padding:5px 10px; border-radius:6px; background:rgba(0,0,0,.78); color:#fff; font-size:14px; }
+  #size { position:absolute; padding:7px 12px; border-radius:6px; background:rgba(0,0,0,.78); color:#fff; font-size:14px; }
   #loupe { position:absolute; width:136px; height:136px; border-radius:12px; overflow:hidden; border:2px solid rgba(255,255,255,.9);
            box-shadow:0 10px 30px rgba(0,0,0,.35); background:#111; display:grid; grid-template-columns:repeat(17, 8px); }
   #loupe i { width:8px; height:8px; display:block; }
   #loupe .mid { position:absolute; left:64px; top:64px; width:8px; height:8px; outline:1.5px solid #fff; }
-  #loupe-info { position:absolute; padding:3px 8px; border-radius:5px; background:rgba(0,0,0,.78); color:#fff; font-size:12px; }
+  #loupe-info { position:absolute; padding:6px 10px; border-radius:5px; background:rgba(0,0,0,.78); color:#fff; font-size:12px; }
   .keys { position:absolute; display:flex; gap:10px; }
   .key { min-width:66px; height:66px; padding:0 14px; border-radius:13px; background:#fff; border:1px solid #ddd5df; box-shadow:0 5px 0 #d2c8d5;
-         display:grid; place-items:center; font:600 28px "Inter", sans-serif; color:var(--ink); }
+         display:grid; place-items:center; font:600 28px "Hanken Grotesk", sans-serif; color:var(--ink); }
   .klabel { position:absolute; font-size:19px; color:var(--muted); font-weight:500; }
 
   /* Éditeur */
@@ -76,7 +76,7 @@
   .tb .tools span.on { background:#fff; box-shadow:0 1px 2px rgba(0,0,0,.15); }
   .tb svg { width:16px; height:16px; stroke:#3b3540; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
   .tb .swatch { width:24px; height:24px; border-radius:6px; background:var(--red); margin-left:10px; box-shadow:inset 0 0 0 1px rgba(0,0,0,.15); }
-  .tb .pop { height:24px; padding:0 10px; border-radius:6px; background:#fff; border:1px solid #ddd6e0; font-size:12px; display:flex; align-items:center; color:#3b3540; }
+  .tb .pop { height:26px; padding:0 12px; border-radius:6px; background:#fff; border:1px solid #ddd6e0; font-size:12px; display:flex; align-items:center; color:#3b3540; }
   .tb .act { margin-left:auto; display:flex; gap:6px; }
   .tb .act span { width:30px; height:26px; border-radius:6px; background:#fff; border:1px solid #ddd6e0; display:grid; place-items:center; }
   .canvas { position:absolute; left:40px; top:72px; width:920px; height:480px; background:#fff; border-radius:4px; overflow:hidden;
@@ -89,7 +89,7 @@
              font-weight:800; font-size:21px; box-shadow:0 3px 8px rgba(0,0,0,.2); }
   #mosaic { position:absolute; display:grid; grid-template-columns:repeat(30, 10px); overflow:hidden; border-radius:2px; }
   #mosaic i { width:10px; height:10px; display:block; }
-  #rlabel { position:absolute; padding:3px 9px; border-radius:5px; background:var(--red); color:#fff; font:600 14px "JetBrains Mono", monospace; }
+  #rlabel { position:absolute; padding:6px 12px; border-radius:5px; background:var(--red); color:#fff; font:600 14px "JetBrains Mono", monospace; }
   #toast { position:absolute; left:50%; top:654px; transform:translateX(-50%); padding:10px 20px; border-radius:22px; background:rgba(30,26,34,.88);
            color:#fff; font-size:16px; font-weight:500; white-space:nowrap; }
 
@@ -116,7 +116,7 @@
   #features .cards { position:absolute; left:90px; right:90px; top:270px; display:flex; gap:28px; }
   .card { flex:1; background:var(--card); border-radius:22px; padding:32px 30px; box-shadow:0 18px 50px rgba(60,20,40,.10), 0 0 0 1px rgba(0,0,0,.04); }
   .card .k { font:600 14px "JetBrains Mono", monospace; color:var(--plum); letter-spacing:1px; text-transform:uppercase; }
-  .card h2 { margin:14px 0 10px; font-size:30px; letter-spacing:-.6px; }
+  .card h2 { margin:0 0 10px; font-size:30px; letter-spacing:-.6px; }
   .card p { margin:0; font-size:18.5px; color:var(--muted); line-height:1.45; }
 
   /* Fin */
@@ -242,9 +242,9 @@
   <section id="features" class="clip" data-start="19" data-duration="3" data-track-index="1">
     <h3 id="f-title">A screenshot tool that does the details.</h3>
     <div class="cards">
-      <div class="card"><div class="k">Annotate</div><h2>14 tools</h2><p>Arrows, shapes, text, counters, spotlight, blur and pixelate, with undo.</p></div>
-      <div class="card"><div class="k">Measure</div><h2>Pixel-perfect</h2><p>Smart ruler snaps to edges. Color picker with HEX, OKLCH and contrast.</p></div>
-      <div class="card"><div class="k">More</div><h2>Scroll, OCR, pin</h2><p>Stitch long pages, copy text or QR codes, float shots above your work.</p></div>
+      <div class="card"><h2>Annotate</h2><p>14 tools: arrows, shapes, text, counters, spotlight, blur and pixelate, with undo.</p></div>
+      <div class="card"><h2>Measure</h2><p>Smart ruler snaps to edges. Color picker with HEX, OKLCH and contrast.</p></div>
+      <div class="card"><h2>Scroll · OCR · Pin</h2><p>Stitch long pages, copy text or QR codes, float shots above your work.</p></div>
     </div>
   </section>
 
