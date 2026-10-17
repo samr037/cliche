@@ -20,7 +20,7 @@ Only the latest release receives fixes.
 | Unit and security tests | every push and PR | `ClicheCore` (input validation, rendering, stitching…) |
 | CodeQL `security-extended` | push, PR, weekly | static analysis of the Swift code |
 | gitleaks | push, PR, weekly | secrets in the full git history |
-| OpenSSF Scorecard | push, weekly | supply chain hygiene |
+| OpenSSF Scorecard | push, weekly (public repo) | supply chain hygiene |
 | Dependabot | weekly | pinned GitHub Actions |
 
 ## Verifying a download

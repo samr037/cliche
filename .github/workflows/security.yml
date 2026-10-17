@@ -58,7 +58,9 @@ jobs:
           ./gitleaks git --redact --no-banner -v .
 
   # Bonnes pratiques de la chaîne d'approvisionnement (actions épinglées, permissions, branches…).
+  # Dépôt public seulement : sur un dépôt privé, Scorecard exige un jeton personnel (GraphQL).
   scorecard:
+    if: ${{ !github.event.repository.private }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
