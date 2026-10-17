@@ -1,12 +1,23 @@
 name: release
 
+# Deux livraisons :
+#  - tag vX.Y.Z (scripts/release.sh)  → release « Cliché X.Y.Z », notes tirées de CHANGELOG.md ;
+#  - push sur main qui touche le code → pré-release « Nightly » remplacée à chaque fois,
+#    lien stable : releases/download/nightly/Cliche-nightly.dmg
 on:
   push:
     tags: ["v*"]
+    branches: [main]
+    paths-ignore: ["**.md", "docs/**", ".github/ISSUE_TEMPLATE/**", ".github/dependabot.yml"]
   workflow_dispatch:
 
 permissions:
   contents: read
+
+# Un seul build nightly à la fois (le plus récent gagne) ; les releases taguées ne s'annulent jamais.
+concurrency:
+  group: release-${{ github.ref_type == 'tag' && github.ref_name || 'nightly' }}
+  cancel-in-progress: ${{ github.ref_type != 'tag' }}
 
 jobs:
   dmg:
@@ -19,20 +30,38 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+          fetch-depth: 0   # tags et historique : notes du nightly depuis la dernière release
 
-      - name: Tests
-        run: CLICHE_BUILD="$RUNNER_TEMP/build" scripts/test.sh
+      - name: Version
+        run: |
+          BASE=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" Resources/Info.plist)
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            VERSION="${GITHUB_REF_NAME#v}"; NAME="Cliche-$VERSION"
+            [ "$VERSION" = "$BASE" ] || { echo "::error::Tag $GITHUB_REF_NAME ≠ version $BASE dans Info.plist (utiliser scripts/release.sh)"; exit 1; }
+          else
+            VERSION="$BASE-nightly.$GITHUB_RUN_NUMBER+${GITHUB_SHA::7}"; NAME="Cliche-nightly"
+          fi
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "NAME=$NAME" >> "$GITHUB_ENV"
+
+      - name: Tests et traductions
+        run: |
+          python3 scripts/l10n.py check
+          CLICHE_BUILD="$RUNNER_TEMP/build" scripts/test.sh
 
       - name: Build Cliché.app
-        run: |
-          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then VERSION="${GITHUB_REF_NAME#v}"; else VERSION="0.0.0-${GITHUB_SHA::7}"; fi
-          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
-          CLICHE_SIGN=- CLICHE_BUILD="$RUNNER_TEMP/build" CLICHE_APP="$PWD/dist/Cliché.app" CLICHE_VERSION="$VERSION" scripts/build-app.sh
+        run: CLICHE_SIGN=- CLICHE_BUILD="$RUNNER_TEMP/build" CLICHE_APP="$PWD/dist/Cliché.app" CLICHE_VERSION="$VERSION" scripts/build-app.sh
 
       - name: DMG
         run: |
-          scripts/make-dmg.sh "dist/Cliché.app" "dist/Cliche-$VERSION.dmg"
-          (cd dist && shasum -a 256 "Cliche-$VERSION.dmg") | tee "dist/Cliche-$VERSION.dmg.sha256"
+          scripts/make-dmg.sh "dist/Cliché.app" "dist/$NAME.dmg"
+          (cd dist && shasum -a 256 "$NAME.dmg") | tee "dist/$NAME.dmg.sha256"
+          # Contrôle du DMG produit : il se monte et contient l'app avec la bonne version.
+          hdiutil attach -nobrowse -noautoopen -mountpoint "$RUNNER_TEMP/mnt" "dist/$NAME.dmg"
+          V=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "$RUNNER_TEMP/mnt/Cliché.app/Contents/Info.plist")
+          codesign --verify --strict "$RUNNER_TEMP/mnt/Cliché.app"
+          hdiutil detach "$RUNNER_TEMP/mnt"
+          [ "$V" = "$VERSION" ] || { echo "::error::version dans le DMG : $V ≠ $VERSION"; exit 1; }
 
       # Provenance signée (Sigstore) : gh attestation verify Cliche-x.y.z.dmg -R samr037/cliche
       # Indisponible pour un dépôt privé de compte personnel : activée automatiquement une fois public.
@@ -44,22 +73,45 @@ jobs:
 
       - name: Bundle d'attestation
         if: ${{ !github.event.repository.private }}
-        run: cp "${{ steps.attest.outputs.bundle-path }}" "dist/Cliche-$VERSION.dmg.sigstore.json"
+        run: cp "${{ steps.attest.outputs.bundle-path }}" "dist/$NAME.dmg.sigstore.json"
 
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: Cliche-${{ env.VERSION }}
+          name: ${{ env.NAME }}
           path: dist/Cliche-*.dmg*
+
+      - name: Notes
+        run: |
+          INSTALL="**Install:** open the DMG and drag Cliché to Applications. On first launch, go to System Settings › Privacy & Security › *Open Anyway* (the app is not notarized). Then allow *Screen Recording*."
+          VERIFY="**Verify:** \`shasum -a 256 -c $NAME.dmg.sha256\`"
+          if [ "${{ github.event.repository.private }}" = "false" ]; then VERIFY="$VERIFY · \`gh attestation verify $NAME.dmg -R $GITHUB_REPOSITORY\`"; fi
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            # Section « ## [X.Y.Z] » du changelog, jusqu'à la suivante.
+            awk -v v="$VERSION" '/^## \[/{p = index($0, "[" v "]") > 0; next} p' CHANGELOG.md > "$RUNNER_TEMP/changes.md"
+            { cat "$RUNNER_TEMP/changes.md"; echo; echo "$INSTALL"; echo; echo "$VERIFY"; } > "$RUNNER_TEMP/notes.md"
+          else
+            { echo "Automatic build of \`main\` at ${GITHUB_SHA::7} ($(date -u '+%Y-%m-%d %H:%M UTC')). Version $VERSION."
+              LAST=$(git describe --tags --abbrev=0 --match 'v*' 2>/dev/null || true)
+              echo; echo "Not a release: may contain unfinished work. Changes since ${LAST:-the beginning}:"
+              echo; git log --oneline --no-decorate ${LAST:+$LAST..}HEAD | head -30 | sed 's/^/- /'
+              echo; echo "$INSTALL"; echo; echo "$VERIFY"; } > "$RUNNER_TEMP/notes.md"
+          fi
+          cat "$RUNNER_TEMP/notes.md"
 
       - name: Release
         if: github.ref_type == 'tag'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          cat > "$RUNNER_TEMP/notes.md" <<NOTES
-          **Install:** open the DMG, drag Cliché to Applications. First launch: System Settings › Privacy & Security › *Open Anyway* (the app is not notarized). Then allow *Screen Recording*.
+          gh release create "$GITHUB_REF_NAME" dist/$NAME.dmg* --verify-tag \
+            --title "Cliché $VERSION" --notes-file "$RUNNER_TEMP/notes.md"
 
-          **Verify** that this DMG was built by this repository's CI: \`gh attestation verify Cliche-$VERSION.dmg -R ${GITHUB_REPOSITORY}\`
-          NOTES
-          gh release create "$GITHUB_REF_NAME" dist/Cliche-$VERSION.dmg* \
-            --title "Cliché $VERSION" --notes-file "$RUNNER_TEMP/notes.md" --generate-notes
+      # Pré-release « Nightly » recréée sur le commit courant (tag nightly déplacé).
+      - name: Nightly
+        if: github.ref_type != 'tag'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete nightly --cleanup-tag --yes -R "$GITHUB_REPOSITORY" 2>/dev/null || true
+          gh release create nightly dist/$NAME.dmg* -R "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+            --prerelease --latest=false --title "Nightly ($VERSION)" --notes-file "$RUNNER_TEMP/notes.md"

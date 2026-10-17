@@ -51,6 +51,8 @@ Dans l'éditeur : V sélection, A flèche, L ligne, R rectangle, O ovale, T text
 2. Première ouverture : Réglages Système › Confidentialité et sécurité › **Ouvrir quand même** (app non notariée).
 3. Autorisez **Enregistrement de l'écran** ; la capture défilante demande aussi **Accessibilité**.
 
+Version de développement : [**Nightly**](https://github.com/samr037/cliche/releases/tag/nightly), reconstruite automatiquement depuis `main` à chaque changement de code (`Cliche-nightly.dmg`, non testée).
+
 Vérifier la provenance : `gh attestation verify Cliche-0.1.0.dmg -R samr037/cliche`
 
 ## Compiler
@@ -60,5 +62,7 @@ scripts/test.sh
 CLICHE_SIGN=- scripts/build-app.sh
 scripts/make-dmg.sh ~/Applications/Cliché.app dist/Cliche.dmg
 ```
+
+Publier une version : décrire les changements sous *Unreleased* dans [CHANGELOG.md](CHANGELOG.md), puis `scripts/release.sh 0.3.0`. La CI construit et publie le DMG.
 
 Projet indépendant inspiré de [Shottr](https://shottr.cc), sans lien avec lui. [Licence MIT](LICENSE).

@@ -82,6 +82,8 @@ Hold ⇧ to snap lines to 45° and rectangles to squares. ⌘Z / ⇧⌘Z undo an
 2. The first time you open it, go to System Settings › Privacy & Security › **Open Anyway**. The app is not notarized by Apple.
 3. Allow **Screen Recording**. Scrolling capture also needs **Accessibility**.
 
+Want the latest changes? [**Nightly**](https://github.com/samr037/cliche/releases/tag/nightly) is rebuilt automatically from `main` after every code change (`Cliche-nightly.dmg`). It's untested work in progress.
+
 Check that a DMG really comes from this repository's CI:
 
 ```sh
@@ -97,6 +99,8 @@ scripts/test.sh                          # unit and security tests (ClicheCore)
 CLICHE_SIGN=- scripts/build-app.sh       # ~/Applications/Cliché.app, ad hoc signed
 scripts/make-dmg.sh ~/Applications/Cliché.app dist/Cliche.dmg
 ```
+
+**Releasing:** add your changes under *Unreleased* in [CHANGELOG.md](CHANGELOG.md), then run `scripts/release.sh 0.3.0`. The script checks the tree, runs the tests, bumps the version, tags and pushes. CI builds the DMG and publishes the release, with notes taken from the changelog.
 
 Tip: sign with a stable local certificate (`CLICHE_SIGN="My Dev Cert"`). macOS ties the Screen Recording permission to the signature, so an ad hoc build asks again after every rebuild.
 
