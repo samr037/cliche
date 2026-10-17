@@ -1,0 +1,23 @@
+Install Cliché
+==============
+
+Requires macOS 14 (Sonoma) or later, Apple Silicon or Intel.
+
+1. Drag Cliché onto the Applications folder.
+
+2. Open Cliché from Applications. macOS refuses the first time because the app
+   is not notarized by Apple:
+   - open System Settings › Privacy & Security;
+   - scroll to the message about Cliché and click "Open Anyway";
+   - confirm with your password.
+
+3. Allow "Screen Recording" when asked (System Settings › Privacy & Security ›
+   Screen & System Audio Recording › enable Cliché). Scrolling capture also
+   needs "Accessibility".
+
+4. Cliché lives in the menu bar. Default shortcuts:
+     ⌘⇧1  fullscreen      ⌘⇧2  area         ⌘⇧6  window
+     ⌘⇧7  scrolling       ⌘⇧8  text (OCR)   ⌘⇧9  repeat area
+   Change them in Settings › Shortcuts.
+
+Everything stays on your Mac: no account, no upload, no telemetry.
